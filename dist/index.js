@@ -35,6 +35,7 @@ __exportStar(require("./args.ts"), exports);
 __exportStar(require("./fs.ts"), exports);
 __exportStar(require("./chars.ts"), exports);
 __exportStar(require("./date.ts"), exports);
+__exportStar(require("./function.ts"), exports);
 var mod_ts_1 = require("https://deno.land/std@0.211.0/assert/mod.ts");
 __createBinding(exports, mod_ts_1, "AssertionError");
 __createBinding(exports, mod_ts_1, "assert");

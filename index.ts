@@ -23,7 +23,9 @@ export * from './process.ts';
 export * from './args.ts';
 export * from './fs.ts';
 export * from './chars.ts';
+
 export * from './date.ts';
+export * from './function.ts';
 
 export {
     AssertionError,
