@@ -186,7 +186,8 @@ export interface AsyncFunc extends Function {
  * @returns {boolean} <en_us>detection results, True represents this method as asynchronous method, FALSE indicates that the method is a synchronization method</en_us><zh_cn>检测结果，true表示该方法为异步方法，false表示该方法为同步方法</zh_cn><zh_tw>檢測結果，true表示該方法為異步方法，false表示該方法為同步方法</zh_tw>
  */
 export function isAsyncFunc(func: unknown): func is AsyncFunc {
-	return func instanceof Function && (func instanceof Promise);
+	// return func instanceof Function && (func instanceof Promise);
+	return func instanceof Function && 'async' in func;
 }
 
 /**
@@ -197,7 +198,8 @@ export function isAsyncFunc(func: unknown): func is AsyncFunc {
  * @returns {boolean} <en_us>detection results, True represents the method of synchronization, FALSE represents the asynchronous method</en_us><zh_cn>检测结果，true表示该方法为同步方法，false表示该方法为异步方法</zh_cn><zh_tw>檢測結果，true表示該方法為同步方法，false表示該方法為異步方法</zh_tw>
  */
 export function isSyncFunc(func: unknown): func is SyncFunc {
-	return func instanceof Function && !(func instanceof Promise);
+	// return func instanceof Function && !(func instanceof Promise);
+	return func instanceof Function && !('async' in func);
 }
 
 /* ================================================================================================
