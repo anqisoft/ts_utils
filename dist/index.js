@@ -1,4 +1,3 @@
-"use strict";
 /*
  * Copyright (c) 2024 anqisoft@gmail.com
  * index.ts
@@ -18,58 +17,16 @@
  * 功能：提供typescript各代碼庫最基礎且共用的功能，與javascript版的js_utils庫對等
  * </zh_tw>
  */
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
-};
-exports.__esModule = true;
-__exportStar(require("./src/i18n.ts"), exports);
-__exportStar(require("./src/process.ts"), exports);
-__exportStar(require("./src/args.ts"), exports);
-__exportStar(require("./src/fs.ts"), exports);
-__exportStar(require("./src/chars.ts"), exports);
-__exportStar(require("./src/date.ts"), exports);
-__exportStar(require("./src/function.ts"), exports);
-__exportStar(require("./src/number.ts"), exports);
-var mod_ts_1 = require("https://deno.land/std@0.211.0/assert/mod.ts");
-__createBinding(exports, mod_ts_1, "type");
-__createBinding(exports, mod_ts_1, "AnyConstructor");
-__createBinding(exports, mod_ts_1, "type");
-__createBinding(exports, mod_ts_1, "ArrayLikeArg");
-__createBinding(exports, mod_ts_1, "assert");
-__createBinding(exports, mod_ts_1, "assertAlmostEquals");
-__createBinding(exports, mod_ts_1, "assertArrayIncludes");
-__createBinding(exports, mod_ts_1, "assertEquals");
-__createBinding(exports, mod_ts_1, "assertExists");
-__createBinding(exports, mod_ts_1, "assertFalse");
-__createBinding(exports, mod_ts_1, "assertGreater");
-__createBinding(exports, mod_ts_1, "assertGreaterOrEqual");
-__createBinding(exports, mod_ts_1, "assertInstanceOf");
-__createBinding(exports, mod_ts_1, "AssertionError");
-__createBinding(exports, mod_ts_1, "assertIsError");
-__createBinding(exports, mod_ts_1, "assertLess");
-__createBinding(exports, mod_ts_1, "assertLessOrEqual");
-__createBinding(exports, mod_ts_1, "assertMatch");
-__createBinding(exports, mod_ts_1, "assertNotEquals");
-__createBinding(exports, mod_ts_1, "assertNotInstanceOf");
-__createBinding(exports, mod_ts_1, "assertNotMatch");
-__createBinding(exports, mod_ts_1, "assertNotStrictEquals");
-__createBinding(exports, mod_ts_1, "assertObjectMatch");
-__createBinding(exports, mod_ts_1, "assertRejects");
-__createBinding(exports, mod_ts_1, "assertStrictEquals");
-__createBinding(exports, mod_ts_1, "assertStringIncludes");
-__createBinding(exports, mod_ts_1, "assertThrows");
-__createBinding(exports, mod_ts_1, "equal");
-__createBinding(exports, mod_ts_1, "fail");
-__createBinding(exports, mod_ts_1, "type");
-__createBinding(exports, mod_ts_1, "Falsy");
-__createBinding(exports, mod_ts_1, "type");
-__createBinding(exports, mod_ts_1, "GetConstructorType");
-__createBinding(exports, mod_ts_1, "unimplemented");
-__createBinding(exports, mod_ts_1, "unreachable");
+export * from './src/i18n.ts';
+export * from './src/process.ts';
+export * from './src/args.ts';
+export * from './src/fs.ts';
+export * from './src/chars.ts';
+export * from './src/date.ts';
+export * from './src/function.ts';
+export * from './src/number.ts';
+export { type, AnyConstructor, // Any constructor
+type, ArrayLikeArg, // array-like object (Array, Uint8Array, NodeList, etc.) that is not a string
+assert, assertAlmostEquals, assertArrayIncludes, assertEquals, assertExists, assertFalse, assertGreater, assertGreaterOrEqual, assertInstanceOf, AssertionError, assertIsError, assertLess, assertLessOrEqual, assertMatch, assertNotEquals, assertNotInstanceOf, assertNotMatch, assertNotStrictEquals, assertObjectMatch, assertRejects, assertStrictEquals, assertStringIncludes, assertThrows, equal, fail, type, Falsy, // Assertion condition for assertFalse.
+type, GetConstructorType, // Gets constructor type
+unimplemented, unreachable, } from 'https://deno.land/std@0.211.0/assert/mod.ts';

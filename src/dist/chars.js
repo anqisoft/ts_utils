@@ -1,3 +1,4 @@
+"use strict";
 /*
  * Copyright (c) 2024 anqisoft@gmail.com
  * chars.ts
@@ -17,51 +18,33 @@
  * 功能：
  * </zh_tw>
  */
-
+exports.__esModule = true;
+exports.SPLIT_SEPARATOR = exports.CRLF = exports.LF = exports.CR = void 0;
 /**
     <en_us>en_us</en_us>
     <zh_cn>回车</zh_cn>
     <zh_tw>zh_tw</zh_tw>
 */
-export const CR = '\r';
-
+exports.CR = '\r';
 /**
     <en_us>en_us</en_us>
     <zh_cn>换行</zh_cn>
     <zh_tw>zh_tw</zh_tw>
 */
-export const LF = '\n';
-
+exports.LF = '\n';
 /**
     <en_us>en_us</en_us>
     <zh_cn>回车换行符</zh_cn>
     <zh_tw>zh_tw</zh_tw>
 */
-export const CRLF = '\r\n';
-
+exports.CRLF = '\r\n';
 /**
     <en_us>en_us</en_us>
     <zh_cn>拆分专用分隔符，先把一系列特殊的字符串替换成这个，再用这个进一步拆分</zh_cn>
     <zh_tw>zh_tw</zh_tw>
 */
-export const SPLIT_SEPARATOR = '\0';
-
-declare global {
-	interface String {
-		/**
-            <en_us>en_us</en_us>
-            <zh_cn>将指定字符串字面量或正则表达式，替换为拆分专用分隔符</zh_cn>
-            <zh_tw>zh_tw</zh_tw>
-
-            @param from {string | RegExp} <en_us>en_us</en_us><zh_cn>想要替换为拆分专用分隔符的字符串字面量或正则表达式</zh_cn><zh_tw>zh_tw</zh_tw>
-            @returns {string} <en_us>en_us</en_us><zh_cn>替换结果</zh_cn><zh_tw>zh_tw</zh_tw>
-        */
-		_replaceToSplitSeparator(this: string, from: string | RegExp): string;
-	}
-}
-
-String.prototype._replaceToSplitSeparator = function (from: string | RegExp): string {
-	return this.replace(from, SPLIT_SEPARATOR);
+exports.SPLIT_SEPARATOR = '\0';
+String.prototype._replaceToSplitSeparator = function (from) {
+    return this.replace(from, exports.SPLIT_SEPARATOR);
 };
-
 // @see https://www.cnblogs.com/wengxuesong/p/5613178.html

@@ -1,3 +1,4 @@
+"use strict";
 /*
  * Copyright (c) 2024 anqisoft@gmail.com
  * process.ts
@@ -17,15 +18,15 @@
  * 功能：提供進程處理相關功能
  * </zh_tw>
  */
-
+exports.__esModule = true;
+exports.getCurrentWorkingDirectory = exports.exitProcess = void 0;
 /*
  * <en_us>exit process, call Deno.exit</en_us>
  * <zh_cn>退出进程，调用Deno.exit</zh_cn>
  * <zh_tw>退出進程，調用Deno.exit</zh_tw>
  * @see https://deno.land/api@v1.39.2?s=Deno.exit
  */
-export const exitProcess: (code?: number | undefined) => never = Deno.exit;
-
+exports.exitProcess = Deno.exit;
 /*
  * <en_us></en_us>
  * <zh_cn>获取当前活动目录</zh_cn>
@@ -33,4 +34,4 @@ export const exitProcess: (code?: number | undefined) => never = Deno.exit;
  * @returns string <en_us>en_us</en_us><zh_cn>当前活动目录</zh_cn><zh_tw>zh_tw</zh_tw>
  * @see https://deno.land/api@v1.39.2?s=Deno.exit
  */
-export const getCurrentWorkingDirectory = Deno.cwd;
+exports.getCurrentWorkingDirectory = Deno.cwd;

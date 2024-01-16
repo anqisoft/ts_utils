@@ -1,11 +1,11 @@
 export type I18N_LANG_KIND = 'en_us' | 'zh_cn' | 'zh_tw';
 export declare const I18N_LANG_ARRAY: string[];
-export declare const EN_US_START_TAG = "<en_us>";
-export declare const EN_US_END_TAG = "</en_us>";
-export declare const ZH_CN_START_TAG = "<zh_cn>";
-export declare const ZH_CN_END_TAG = "</zh_cn>";
-export declare const ZH_TW_START_TAG = "<zh_tw>";
-export declare const ZH_TW_END_TAG = "</zh_tw>";
+export declare const HTML_TAG_BEGIN__EN_US = "<en_us>";
+export declare const HTML_TAG_END__EN_US = "</en_us>";
+export declare const HTML_TAG_BEGIN__ZH_CN = "<zh_cn>";
+export declare const HTML_TAG_END__ZH_CN = "</zh_cn>";
+export declare const HTML_TAG_BEGIN__ZH_TW = "<zh_tw>";
+export declare const HTML_TAG_END__ZH_TW = "</zh_tw>";
 export interface I18nable {
     en_us: string;
     zh_cn: string;
@@ -26,10 +26,10 @@ export declare enum I18nFlag {
  * <zh_cn>开始标记长度</zh_cn>
  * <zh_tw></zh_tw>
  */
-export declare const START_TAG_LENGTH = 7;
+export declare const I18N_HTML_TAG_LENGTH_BEGIN = 7;
 /**
  * <en_us></en_us>
  * <zh_cn>结束标记长度</zh_cn>
  * <zh_tw></zh_tw>
  */
-export declare const END_TAG_LENGTH: number;
+export declare const I18N_HTML_TAG_LENGTH_END: number;

@@ -1,3 +1,4 @@
+"use strict";
 /*
  * Copyright (c) 2024 anqisoft@gmail.com
  * args.ts
@@ -17,10 +18,11 @@
  * 功能：提供命令行參數解析相關功能
  * </zh_tw>
  */
-
+exports.__esModule = true;
+exports.COMMAND_LINE_ARGS = void 0;
 /*
  * <en_us>command line parameters</en_us>
  * <zh_cn>命令行参数</zh_cn>
  * <zh_tw>命令行參數</zh_tw>
  */
-export const COMMAND_LINE_ARGS = Deno.args;
+exports.COMMAND_LINE_ARGS = Deno.args;

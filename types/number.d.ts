@@ -18,4 +18,4 @@
  * <zh_cn>四舍五入结果</zh_cn>
  * <zh_tw>四捨五入結果</zh_tw>
  */
-export declare const superRound: (num: number, digit: number) => number;
+export declare const roundWithDigit: (num: number, digit: number) => number;

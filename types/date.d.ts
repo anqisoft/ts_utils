@@ -3,7 +3,7 @@
  * <zh_cn>日期修正值</zh_cn>
  * <zh_tw>日期修正值</zh_tw>
  */
-export declare const DATE_FIX_VALUE: number;
+export declare const DATE_OFFSET_GMT8: number;
 /**
  * <en_us>Get the corrected date</en_us>
  * <zh_cn>获取修正后的日期</zh_cn>

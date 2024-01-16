@@ -1,3 +1,4 @@
+"use strict";
 /*
  * Copyright (c) 2024 anqisoft@gmail.com
  * number.ts
@@ -17,7 +18,8 @@
  * 功能：
  * </zh_tw>
  */
-
+exports.__esModule = true;
+exports.roundWithDigit = void 0;
 /**
  * <en_us>Advanced rounding</en_us>
  * <zh_cn>高级四舍五入</zh_cn>
@@ -38,19 +40,7 @@
  * <zh_cn>四舍五入结果</zh_cn>
  * <zh_tw>四捨五入結果</zh_tw>
  */
-export const roundWithDigit = (num: number, digit: number) => parseFloat(num.toFixed(digit));
-
-declare global {
-	interface Number {
-		/**
-		 * <en_us>en_us</en_us><zh_cn>带小数位进行四舍五入</zh_cn><zh_tw>zh_tw</zh_tw>
-		 * @param digit number <en_us>en_us</en_us><zh_cn>小数位数</zh_cn><zh_tw>zh_tw</zh_tw>
-		 * @returns number 带小数位四舍五入结果
-		 */
-		_roundWithDigit(digit: number): number;
-	}
-}
-
-Number.prototype._roundWithDigit = function (digit: number): number {
-	return parseFloat(this.toFixed(digit));
+exports.roundWithDigit = function (num, digit) { return parseFloat(num.toFixed(digit)); };
+Number.prototype._roundWithDigit = function (digit) {
+    return parseFloat(this.toFixed(digit));
 };
