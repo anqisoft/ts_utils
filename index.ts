@@ -187,7 +187,8 @@ export interface AsyncFunc extends Function {
  */
 export function isAsyncFunc(func: unknown): func is AsyncFunc {
 	// return func instanceof Function && (func instanceof Promise);
-	return func instanceof Function && 'async' in func;
+	// return func instanceof Function && 'async' in func;
+	return func instanceof Function && func.constructor.name === 'AsyncFunction';
 }
 
 /**
@@ -199,7 +200,8 @@ export function isAsyncFunc(func: unknown): func is AsyncFunc {
  */
 export function isSyncFunc(func: unknown): func is SyncFunc {
 	// return func instanceof Function && !(func instanceof Promise);
-	return func instanceof Function && !('async' in func);
+	// return func instanceof Function && !('async' in func);
+	return func instanceof Function && func.constructor.name === 'Function';
 }
 
 /* ================================================================================================

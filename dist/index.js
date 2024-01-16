@@ -109,7 +109,8 @@ Date.prototype._toGmt8FilenameTimestampPostfix = function () {
  */
 export function isAsyncFunc(func) {
     // return func instanceof Function && (func instanceof Promise);
-    return func instanceof Function && 'async' in func;
+    // return func instanceof Function && 'async' in func;
+    return func instanceof Function && func.constructor.name === 'AsyncFunction';
 }
 /**
  * <en_us>Guard: Synchronous method</en_us>
@@ -120,7 +121,8 @@ export function isAsyncFunc(func) {
  */
 export function isSyncFunc(func) {
     // return func instanceof Function && !(func instanceof Promise);
-    return func instanceof Function && !('async' in func);
+    // return func instanceof Function && !('async' in func);
+    return func instanceof Function && func.constructor.name === 'Function';
 }
 /**
  * <en_us>to detect whether the string is supported by the supported international language type</en_us>
