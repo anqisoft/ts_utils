@@ -3,9 +3,9 @@
  * index.ts
  *
  * <en_us>
-  * Creation: January 15, 2024 11:38:05
-  * Function: Provide the most basic and common feature of TypeScript code libraries, which is paired with the javascript version of js_utils library, etc.
-  * </en_us>
+ * Creation: January 15, 2024 11:38:05
+ * Function: Provide the most basic and common feature of TypeScript code libraries, which is paired with the javascript version of js_utils library, etc.
+ * </en_us>
  *
  * <zh_cn>
  * 创建：2024年1月15日 11:38:05
