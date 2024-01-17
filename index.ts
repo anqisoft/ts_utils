@@ -210,9 +210,9 @@ export function isSyncFunc(func: unknown): func is SyncFunc {
 <zh_tw>國際化：提供國際化支持基礎類型、標記等</zh_tw>
 ================================================================================================ */
 /**
- * <en_us>en_us</en_us>
+ * <en_us>international language name</en_us>
  * <zh_cn>国际化语言名称</zh_cn>
- * <zh_tw>zh_tw</zh_tw>
+ * <zh_tw>國際化語言名稱</zh_tw>
  */
 export enum I18N_LANG_NAME {
 	en_us = 'en_us',
@@ -630,9 +630,9 @@ export const PROCESS_PARENT_ID = Deno.ppid;
 export const exitProcess = Deno.exit;
 
 /**
- * <en_us>kill process, call Deno.kill</en_us>
+ * <en_us>kill the process, call Deno.kill</en_us>
  * <zh_cn>杀掉进程，调用Deno.kill</zh_cn>
- * <zh_tw></zh_tw>
+ * <zh_tw>殺掉進程，調用Deno.kill</zh_tw>
  * @see https://deno.land/api@v1.39.2?s=Deno.exit
  */
 export const killProcess = Deno.kill;

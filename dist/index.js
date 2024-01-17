@@ -3,9 +3,9 @@
  * index.ts
  *
  * <en_us>
- * Creation: January 15, 2024 11:38:05
- * Function: Provide the most basic and common feature of TypeScript code libraries, which is paired with the javascript version of js_utils library, etc.
- * </en_us>
+  * Creation: January 15, 2024 11:38:05
+  * Function: Provide the most basic and common feature of TypeScript code libraries, which is paired with the javascript version of js_utils library, etc.
+  * </en_us>
  *
  * <zh_cn>
  * 创建：2024年1月15日 11:38:05
@@ -130,10 +130,10 @@ export function isSyncFunc(func) {
 <zh_tw>國際化：提供國際化支持基礎類型、標記等</zh_tw>
 ================================================================================================ */
 /**
- * <en_us>en_us</en_us>
+ * <en_us>international language name</en_us>
  * <zh_cn>国际化语言名称</zh_cn>
- * <zh_tw>zh_tw</zh_tw>
-*/
+ * <zh_tw>國際化語言名稱</zh_tw>
+ */
 export var I18N_LANG_NAME;
 (function (I18N_LANG_NAME) {
     I18N_LANG_NAME["en_us"] = "en_us";
@@ -156,7 +156,11 @@ export function isI18nLangKind(lang) {
  * <zh_cn>可国际化</zh_cn>
  * <zh_tw>可國際化</zh_tw>
  */
-export const I18N_LANG_ARRAY = [I18N_LANG_NAME.en_us, I18N_LANG_NAME.zh_cn, I18N_LANG_NAME.zh_tw];
+export const I18N_LANG_ARRAY = [
+    I18N_LANG_NAME.en_us,
+    I18N_LANG_NAME.zh_cn,
+    I18N_LANG_NAME.zh_tw,
+];
 /**
  * <en_us>American English Start Label</en_us>
  * <zh_cn>美式英语起始标记</zh_cn>
@@ -392,9 +396,9 @@ export const PROCESS_PARENT_ID = Deno.ppid;
  */
 export const exitProcess = Deno.exit;
 /**
- * <en_us>kill process, call Deno.kill</en_us>
+ * <en_us>kill the process, call Deno.kill</en_us>
  * <zh_cn>杀掉进程，调用Deno.kill</zh_cn>
- * <zh_tw></zh_tw>
+ * <zh_tw>殺掉進程，調用Deno.kill</zh_tw>
  * @see https://deno.land/api@v1.39.2?s=Deno.exit
  */
 export const killProcess = Deno.kill;
