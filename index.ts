@@ -209,6 +209,16 @@ export function isSyncFunc(func: unknown): func is SyncFunc {
 <zh_cn>国际化：提供国际化支持基础类型、标记等</zh_cn>
 <zh_tw>國際化：提供國際化支持基礎類型、標記等</zh_tw>
 ================================================================================================ */
+/**
+ * <en_us>en_us</en_us>
+ * <zh_cn>国际化语言名称</zh_cn>
+ * <zh_tw>zh_tw</zh_tw>
+ */
+export enum I18N_LANG_NAME {
+	en_us = 'en_us',
+	zh_cn = 'zh_cn',
+	zh_tw = 'zh_tw',
+}
 
 /**
  * <en_us>internationalization</en_us>
@@ -226,7 +236,7 @@ export type I18N_LANG_KIND = 'en_us' | 'zh_cn' | 'zh_tw';
  * @returns {boolean} <en_us>Is it a supported international language</en_us><zh_cn>是否为所支持的国际化语言</zh_cn><zh_tw>是否為所支持的國際化語言</zh_tw>
  */
 export function isI18nLangKind(lang: string): lang is I18N_LANG_KIND {
-	return ['en_us', 'zh_cn', 'zh_tw'].indexOf(lang) > -1;
+	return I18N_LANG_ARRAY.indexOf(lang as I18N_LANG_KIND) > -1;
 }
 
 /**
@@ -234,46 +244,50 @@ export function isI18nLangKind(lang: string): lang is I18N_LANG_KIND {
  * <zh_cn>可国际化</zh_cn>
  * <zh_tw>可國際化</zh_tw>
  */
-export const I18N_LANG_ARRAY = ['en_us', 'zh_cn', 'zh_tw'];
+export const I18N_LANG_ARRAY: I18N_LANG_KIND[] = [
+	I18N_LANG_NAME.en_us,
+	I18N_LANG_NAME.zh_cn,
+	I18N_LANG_NAME.zh_tw,
+];
 
 /**
  * <en_us>American English Start Label</en_us>
  * <zh_cn>美式英语起始标记</zh_cn>
  * <zh_tw>美式英語起始標記</zh_tw>
  */
-export const HTML_TAG_BEGIN__EN_US = '<en_us\>';
+export const HTML_TAG_BEGIN__EN_US = `<${I18N_LANG_NAME.en_us}>`;
 /**
  * <en_us>American English ending mark</en_us>
  * <zh_cn>美式英语结束标记</zh_cn>
  * <zh_tw>美式英語結束標記</zh_tw>
  */
-export const HTML_TAG_END__EN_US = '</en_us\>';
+export const HTML_TAG_END__EN_US = `</${I18N_LANG_NAME.en_us}>`;
 
 /**
  * <en_us>Simplified Chinese starting label</en_us>
  * <zh_cn>简体中文起始标记</zh_cn>
  * <zh_tw>簡體中文起始標記</zh_tw>
  */
-export const HTML_TAG_BEGIN__ZH_CN = '<zh_cn\>';
+export const HTML_TAG_BEGIN__ZH_CN = `<${I18N_LANG_NAME.zh_cn}>`;
 /**
  * <en_us>Simplified Chinese end mark</en_us>
  * <zh_cn>简体中文结束标记</zh_cn>
  * <zh_tw>簡體中文結束標記</zh_tw>
  */
-export const HTML_TAG_END__ZH_CN = '</zh_cn\>';
+export const HTML_TAG_END__ZH_CN = `</${I18N_LANG_NAME.zh_cn}>`;
 
 /**
  * <en_us>Traditional Chinese starting label</en_us>
  * <zh_cn>繁体中文起始标记</zh_cn>
  * <zh_tw>繁體中文起始標記</zh_tw>
  */
-export const HTML_TAG_BEGIN__ZH_TW = '<zh_tw\>';
+export const HTML_TAG_BEGIN__ZH_TW = `<${I18N_LANG_NAME.zh_tw}>`;
 /**
  * <en_us>Traditional Chinese end mark</en_us>
  * <zh_cn>繁体中文结束标记</zh_cn>
  * <zh_tw>繁體中文結束標記</zh_tw>
  */
-export const HTML_TAG_END__ZH_TW = '</zh_tw\>';
+export const HTML_TAG_END__ZH_TW = `</${I18N_LANG_NAME.zh_tw}>`;
 
 /**
  * <en_us>internationalization</en_us>
@@ -295,7 +309,7 @@ export interface I18nable {
  * @returns {boolean} <en_us>Is it a supported international language</en_us><zh_cn>是否为所支持的国际化语言</zh_cn><zh_tw>是否為所支持的國際化語言</zh_tw>
  */
 export function isI18nable(obj: object): obj is I18nable {
-	return 'en_us' in obj && 'zh_cn' in obj && 'zh_tw' in obj;
+	return I18N_LANG_NAME.en_us in obj && I18N_LANG_NAME.zh_cn in obj && I18N_LANG_NAME.zh_tw in obj;
 }
 
 /**
@@ -593,20 +607,61 @@ export type ServeUnixInit = Deno.ServeUnixInit;
 export type HttpServer = Deno.HttpServer;
 export type Server = Deno.HttpServer;
 
-export const {
-	/**
-	 * 	<en_us>Process ID</en_us>
-	 * 	<zh_cn>进程id</zh_cn>
-	 * 	<zh_tw>進程id</zh_tw>
-	 */
-	pid: PROCESS_ID,
+/**
+ * 	<en_us>Process ID</en_us>
+ * 	<zh_cn>进程id</zh_cn>
+ * 	<zh_tw>進程id</zh_tw>
+ */
+export const PROCESS_ID = Deno.pid;
 
-	/**
-	 * 	<en_us>Father's process ID</en_us>
-	 * 	<zh_cn>父进程id</zh_cn>
-	 * 	<zh_tw>父進程id</zh_tw>
-	 */
-	ppid: PROCESS_PARENT_ID,
+/**
+ * 	<en_us>Father's process ID</en_us>
+ * 	<zh_cn>父进程id</zh_cn>
+ * 	<zh_tw>父進程id</zh_tw>
+ */
+export const PROCESS_PARENT_ID = Deno.ppid;
+
+/**
+ * <en_us>exit process, call Deno.exit</en_us>
+ * <zh_cn>退出进程，调用Deno.exit</zh_cn>
+ * <zh_tw>退出進程，調用Deno.exit</zh_tw>
+ * @see https://deno.land/api@v1.39.2?s=Deno.exit
+ */
+export const exitProcess = Deno.exit;
+
+/**
+ * <en_us>kill process, call Deno.kill</en_us>
+ * <zh_cn>杀掉进程，调用Deno.kill</zh_cn>
+ * <zh_tw></zh_tw>
+ * @see https://deno.land/api@v1.39.2?s=Deno.exit
+ */
+export const killProcess = Deno.kill;
+
+/**
+ * <en_us>Set the current activity directory</en_us>
+ * <zh_cn>设置当前活动目录</zh_cn>
+ * <zh_tw>設置當前活動目錄</zh_tw>
+ */
+export const setCurrentWorkingDirectory = Deno.chdir;
+
+/**
+ * <en_us>Get the current activity directory</en_us>
+ * <zh_cn>获取当前活动目录</zh_cn>
+ * <zh_tw>獲取當前活動目錄</zh_tw>
+ * @returns {string} <en_us>Current activity directory</en_us><zh_cn>当前活动目录</zh_cn><zh_tw>當前活動目錄</zh_tw>
+ */
+export const getCurrentWorkingDirectory = Deno.cwd;
+
+/**
+ * <en_us>command line parameters</en_us>
+ * <zh_cn>命令行参数</zh_cn>
+ * <zh_tw>命令行參數</zh_tw>
+ */
+export const COMMAND_LINE_ARGS = Deno.args;
+
+export const {
+	// pid: PROCESS_ID,
+	// ppid: PROCESS_PARENT_ID,
 
 	memoryUsage,
 	hostname,
@@ -619,31 +674,13 @@ export const {
 	test,
 	bench,
 
-	/**
-	 * <en_us>exit process, call Deno.exit</en_us>
-	 * <zh_cn>退出进程，调用Deno.exit</zh_cn>
-	 * <zh_tw>退出進程，調用Deno.exit</zh_tw>
-	 * @see https://deno.land/api@v1.39.2?s=Deno.exit
-	 */
-	exit: exitProcess,
+	// exit: exitProcess,
 
 	env,
 	execPath,
 
-	/**
-	 * <en_us>Set the current activity directory</en_us>
-	 * <zh_cn>设置当前活动目录</zh_cn>
-	 * <zh_tw>設置當前活動目錄</zh_tw>
-	 */
-	chdir: setCurrentWorkingDirectory,
-
-	/**
-	 * <en_us>Get the current activity directory</en_us>
-	 * <zh_cn>获取当前活动目录</zh_cn>
-	 * <zh_tw>獲取當前活動目錄</zh_tw>
-	 * @returns {string} <en_us>Current activity directory</en_us><zh_cn>当前活动目录</zh_cn><zh_tw>當前活動目錄</zh_tw>
-	 */
-	cwd: getCurrentWorkingDirectory,
+	// chdir: setCurrentWorkingDirectory,
+	// cwd: getCurrentWorkingDirectory,
 	link,
 	linkSync,
 	SeekMode,
@@ -728,13 +765,7 @@ export const {
 	permissions,
 	build,
 	version,
-
-	/**
-	 * <en_us>command line parameters</en_us>
-	 * <zh_cn>命令行参数</zh_cn>
-	 * <zh_tw>命令行參數</zh_tw>
-	 */
-	args: COMMAND_LINE_ARGS,
+	// args: COMMAND_LINE_ARGS,
 
 	// customInspect,
 	mainModule,
@@ -750,7 +781,7 @@ export const {
 	utime,
 	serveHttp,
 	upgradeWebSocket,
-	kill: killProcess,
+	// kill: killProcess,
 	resolveDns,
 	refTimer,
 	unrefTimer,

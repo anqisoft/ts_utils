@@ -124,6 +124,22 @@ export function isSyncFunc(func) {
     // return func instanceof Function && !('async' in func);
     return func instanceof Function && func.constructor.name === 'Function';
 }
+/* ================================================================================================
+<en_us>Internationalization: Provide international support basic types, marks, etc.</en_us>
+<zh_cn>国际化：提供国际化支持基础类型、标记等</zh_cn>
+<zh_tw>國際化：提供國際化支持基礎類型、標記等</zh_tw>
+================================================================================================ */
+/**
+ * <en_us>en_us</en_us>
+ * <zh_cn>国际化语言名称</zh_cn>
+ * <zh_tw>zh_tw</zh_tw>
+*/
+export var I18N_LANG_NAME;
+(function (I18N_LANG_NAME) {
+    I18N_LANG_NAME["en_us"] = "en_us";
+    I18N_LANG_NAME["zh_cn"] = "zh_cn";
+    I18N_LANG_NAME["zh_tw"] = "zh_tw";
+})(I18N_LANG_NAME || (I18N_LANG_NAME = {}));
 /**
  * <en_us>to detect whether the string is supported by the supported international language type</en_us>
  * <zh_cn>检测字符串是否为所支持的国际化语言类型</zh_cn>
@@ -133,50 +149,50 @@ export function isSyncFunc(func) {
  * @returns {boolean} <en_us>Is it a supported international language</en_us><zh_cn>是否为所支持的国际化语言</zh_cn><zh_tw>是否為所支持的國際化語言</zh_tw>
  */
 export function isI18nLangKind(lang) {
-    return ['en_us', 'zh_cn', 'zh_tw'].indexOf(lang) > -1;
+    return I18N_LANG_ARRAY.indexOf(lang) > -1;
 }
 /**
  * <en_us>internationalization</en_us>
  * <zh_cn>可国际化</zh_cn>
  * <zh_tw>可國際化</zh_tw>
  */
-export const I18N_LANG_ARRAY = ['en_us', 'zh_cn', 'zh_tw'];
+export const I18N_LANG_ARRAY = [I18N_LANG_NAME.en_us, I18N_LANG_NAME.zh_cn, I18N_LANG_NAME.zh_tw];
 /**
  * <en_us>American English Start Label</en_us>
  * <zh_cn>美式英语起始标记</zh_cn>
  * <zh_tw>美式英語起始標記</zh_tw>
  */
-export const HTML_TAG_BEGIN__EN_US = '<en_us\>';
+export const HTML_TAG_BEGIN__EN_US = `<${I18N_LANG_NAME.en_us}>`;
 /**
  * <en_us>American English ending mark</en_us>
  * <zh_cn>美式英语结束标记</zh_cn>
  * <zh_tw>美式英語結束標記</zh_tw>
  */
-export const HTML_TAG_END__EN_US = '</en_us\>';
+export const HTML_TAG_END__EN_US = `</${I18N_LANG_NAME.en_us}>`;
 /**
  * <en_us>Simplified Chinese starting label</en_us>
  * <zh_cn>简体中文起始标记</zh_cn>
  * <zh_tw>簡體中文起始標記</zh_tw>
  */
-export const HTML_TAG_BEGIN__ZH_CN = '<zh_cn\>';
+export const HTML_TAG_BEGIN__ZH_CN = `<${I18N_LANG_NAME.zh_cn}>`;
 /**
  * <en_us>Simplified Chinese end mark</en_us>
  * <zh_cn>简体中文结束标记</zh_cn>
  * <zh_tw>簡體中文結束標記</zh_tw>
  */
-export const HTML_TAG_END__ZH_CN = '</zh_cn\>';
+export const HTML_TAG_END__ZH_CN = `</${I18N_LANG_NAME.zh_cn}>`;
 /**
  * <en_us>Traditional Chinese starting label</en_us>
  * <zh_cn>繁体中文起始标记</zh_cn>
  * <zh_tw>繁體中文起始標記</zh_tw>
  */
-export const HTML_TAG_BEGIN__ZH_TW = '<zh_tw\>';
+export const HTML_TAG_BEGIN__ZH_TW = `<${I18N_LANG_NAME.zh_tw}>`;
 /**
  * <en_us>Traditional Chinese end mark</en_us>
  * <zh_cn>繁体中文结束标记</zh_cn>
  * <zh_tw>繁體中文結束標記</zh_tw>
  */
-export const HTML_TAG_END__ZH_TW = '</zh_tw\>';
+export const HTML_TAG_END__ZH_TW = `</${I18N_LANG_NAME.zh_tw}>`;
 /**
  * <en_us>to detect whether the string is supported by the supported international language type</en_us>
  * <zh_cn>检测字符串是否为所支持的国际化语言类型</zh_cn>
@@ -186,7 +202,7 @@ export const HTML_TAG_END__ZH_TW = '</zh_tw\>';
  * @returns {boolean} <en_us>Is it a supported international language</en_us><zh_cn>是否为所支持的国际化语言</zh_cn><zh_tw>是否為所支持的國際化語言</zh_tw>
  */
 export function isI18nable(obj) {
-    return 'en_us' in obj && 'zh_cn' in obj && 'zh_tw' in obj;
+    return I18N_LANG_NAME.en_us in obj && I18N_LANG_NAME.zh_cn in obj && I18N_LANG_NAME.zh_tw in obj;
 }
 /**
  * <en_us>mark: internationalization</en_us>
@@ -356,39 +372,60 @@ export const FilesystemLoopError = Deno.errors.FilesystemLoop;
 export const IsADirectoryError = Deno.errors.IsADirectory;
 export const NetworkUnreachableError = Deno.errors.NetworkUnreachable;
 export const NotADirectoryError = Deno.errors.NotADirectory;
-export const { 
 /**
  * 	<en_us>Process ID</en_us>
  * 	<zh_cn>进程id</zh_cn>
  * 	<zh_tw>進程id</zh_tw>
  */
-pid: PROCESS_ID, 
+export const PROCESS_ID = Deno.pid;
 /**
  * 	<en_us>Father's process ID</en_us>
  * 	<zh_cn>父进程id</zh_cn>
  * 	<zh_tw>父進程id</zh_tw>
  */
-ppid: PROCESS_PARENT_ID, memoryUsage, hostname, loadavg, networkInterfaces, systemMemoryInfo, noColor, osRelease, osUptime, test, bench, 
+export const PROCESS_PARENT_ID = Deno.ppid;
 /**
  * <en_us>exit process, call Deno.exit</en_us>
  * <zh_cn>退出进程，调用Deno.exit</zh_cn>
  * <zh_tw>退出進程，調用Deno.exit</zh_tw>
  * @see https://deno.land/api@v1.39.2?s=Deno.exit
  */
-exit: exitProcess, env, execPath, 
+export const exitProcess = Deno.exit;
+/**
+ * <en_us>kill process, call Deno.kill</en_us>
+ * <zh_cn>杀掉进程，调用Deno.kill</zh_cn>
+ * <zh_tw></zh_tw>
+ * @see https://deno.land/api@v1.39.2?s=Deno.exit
+ */
+export const killProcess = Deno.kill;
 /**
  * <en_us>Set the current activity directory</en_us>
  * <zh_cn>设置当前活动目录</zh_cn>
  * <zh_tw>設置當前活動目錄</zh_tw>
  */
-chdir: setCurrentWorkingDirectory, 
+export const setCurrentWorkingDirectory = Deno.chdir;
 /**
  * <en_us>Get the current activity directory</en_us>
  * <zh_cn>获取当前活动目录</zh_cn>
  * <zh_tw>獲取當前活動目錄</zh_tw>
  * @returns {string} <en_us>Current activity directory</en_us><zh_cn>当前活动目录</zh_cn><zh_tw>當前活動目錄</zh_tw>
  */
-cwd: getCurrentWorkingDirectory, link, linkSync, SeekMode, 
+export const getCurrentWorkingDirectory = Deno.cwd;
+/**
+ * <en_us>command line parameters</en_us>
+ * <zh_cn>命令行参数</zh_cn>
+ * <zh_tw>命令行參數</zh_tw>
+ */
+export const COMMAND_LINE_ARGS = Deno.args;
+export const { 
+// pid: PROCESS_ID,
+// ppid: PROCESS_PARENT_ID,
+memoryUsage, hostname, loadavg, networkInterfaces, systemMemoryInfo, noColor, osRelease, osUptime, test, bench, 
+// exit: exitProcess,
+env, execPath, 
+// chdir: setCurrentWorkingDirectory,
+// cwd: getCurrentWorkingDirectory,
+link, linkSync, SeekMode, 
 // copy,
 // iter,
 // iterSync,
@@ -407,11 +444,8 @@ resources, watchFs,
 addSignalListener, removeSignalListener, 
 // run,
 Command, ChildProcess, inspect, PermissionStatus, Permissions, permissions, build, version, 
-/**
- * <en_us>command line parameters</en_us>
- * <zh_cn>命令行参数</zh_cn>
- * <zh_tw>命令行參數</zh_tw>
- */
-args: COMMAND_LINE_ARGS, 
+// args: COMMAND_LINE_ARGS,
 // customInspect,
-mainModule, symlink, symlinkSync, ftruncate, ftruncateSync, futimeSync, futime, fstat, fstatSync, utimeSync, utime, serveHttp, upgradeWebSocket, kill: killProcess, resolveDns, refTimer, unrefTimer, uid: UserId, gid: GroupId, } = Deno;
+mainModule, symlink, symlinkSync, ftruncate, ftruncateSync, futimeSync, futime, fstat, fstatSync, utimeSync, utime, serveHttp, upgradeWebSocket, 
+// kill: killProcess,
+resolveDns, refTimer, unrefTimer, uid: UserId, gid: GroupId, } = Deno;
