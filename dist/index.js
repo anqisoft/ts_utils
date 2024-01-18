@@ -3,9 +3,9 @@
  * index.ts
  *
  * <en_us>
-  * Creation: January 15, 2024 11:38:05
-  * Function: Provide the most basic and common feature of TypeScript code libraries, which is paired with the javascript version of js_utils library, etc.
-  * </en_us>
+ * Creation: January 15, 2024 11:38:05
+ * Function: Provide the most basic and common feature of TypeScript code libraries, which is paired with the javascript version of js_utils library, etc.
+ * </en_us>
  *
  * <zh_cn>
  * 创建：2024年1月15日 11:38:05
@@ -104,7 +104,7 @@ Date.prototype._toGmt8FilenameTimestampPostfix = function () {
  * <en_us>Guard: asynchronous method</en_us>
  * <zh_cn>守卫：异步方法</zh_cn>
  * <zh_tw>守衛：異步方法</zh_tw>
- * @param func {unknown} <en_us>Methods that need to be asynchronous</en_us><zh_cn>需检测是否为异步方法的方法</zh_cn><zh_tw>需檢測是否為異步方法的方法</zh_tw>
+ * @param {unknown} func <en_us>Methods that need to be asynchronous</en_us><zh_cn>需检测是否为异步方法的方法</zh_cn><zh_tw>需檢測是否為異步方法的方法</zh_tw>
  * @returns {boolean} <en_us>detection results, True represents this method as asynchronous method, FALSE indicates that the method is a synchronization method</en_us><zh_cn>检测结果，true表示该方法为异步方法，false表示该方法为同步方法</zh_cn><zh_tw>檢測結果，true表示該方法為異步方法，false表示該方法為同步方法</zh_tw>
  */
 export function isAsyncFunc(func) {
@@ -116,7 +116,7 @@ export function isAsyncFunc(func) {
  * <en_us>Guard: Synchronous method</en_us>
  * <zh_cn>守卫：同步方法</zh_cn>
  * <zh_tw>守衛：同步方法</zh_tw>
- * @param func {unknown} <en_us>Methods that need to be detected as a synchronization method</en_us><zh_cn>需检测是否为同步方法的方法</zh_cn><zh_tw>需檢測是否為同步方法的方法</zh_tw>
+ * @param {unknown} func <en_us>Methods that need to be detected as a synchronization method</en_us><zh_cn>需检测是否为同步方法的方法</zh_cn><zh_tw>需檢測是否為同步方法的方法</zh_tw>
  * @returns {boolean} <en_us>detection results, True represents the method of synchronization, FALSE represents the asynchronous method</en_us><zh_cn>检测结果，true表示该方法为同步方法，false表示该方法为异步方法</zh_cn><zh_tw>檢測結果，true表示該方法為同步方法，false表示該方法為異步方法</zh_tw>
  */
 export function isSyncFunc(func) {
@@ -145,7 +145,7 @@ export var I18N_LANG_NAME;
  * <zh_cn>检测字符串是否为所支持的国际化语言类型</zh_cn>
  * <zh_tw>檢測字符串是否為所支持的國際化語言類型</zh_tw>
  *
- * @param lang {string} <en_us>need to detect the string of the internationalized language that is supported</en_us><zh_cn>需检测是否为所支持的国际化语言的字符串</zh_cn><zh_tw>需檢測是否為所支持的國際化語言的字符串</zh_tw>
+ * @param {string} lang <en_us>need to detect the string of the internationalized language that is supported</en_us><zh_cn>需检测是否为所支持的国际化语言的字符串</zh_cn><zh_tw>需檢測是否為所支持的國際化語言的字符串</zh_tw>
  * @returns {boolean} <en_us>Is it a supported international language</en_us><zh_cn>是否为所支持的国际化语言</zh_cn><zh_tw>是否為所支持的國際化語言</zh_tw>
  */
 export function isI18nLangKind(lang) {
@@ -202,7 +202,7 @@ export const HTML_TAG_END__ZH_TW = `</${I18N_LANG_NAME.zh_tw}>`;
  * <zh_cn>检测字符串是否为所支持的国际化语言类型</zh_cn>
  * <zh_tw>檢測字符串是否為所支持的國際化語言類型</zh_tw>
  *
- * @param lang {string} <en_us>need to detect the string of the internationalized language that is supported</en_us><zh_cn>需检测是否为所支持的国际化语言的字符串</zh_cn><zh_tw>需檢測是否為所支持的國際化語言的字符串</zh_tw>
+ * @param {string} lang <en_us>need to detect the string of the internationalized language that is supported</en_us><zh_cn>需检测是否为所支持的国际化语言的字符串</zh_cn><zh_tw>需檢測是否為所支持的國際化語言的字符串</zh_tw>
  * @returns {boolean} <en_us>Is it a supported international language</en_us><zh_cn>是否为所支持的国际化语言</zh_cn><zh_tw>是否為所支持的國際化語言</zh_tw>
  */
 export function isI18nable(obj) {
@@ -318,7 +318,7 @@ export {
     @see https://deno.land/std@0.204.0/path/mod.ts
 */
 join as joinPath, } from 'https://deno.land/std@0.204.0/path/mod.ts';
-export { exists, type, ExistsOptions, existsSync } from 'https://deno.land/std@0.211.0/fs/exists.ts';
+export { exists, ExistsOptions, existsSync } from 'https://deno.land/std@0.211.0/fs/exists.ts';
 // eg: { SEP: "\\", SEP_PATTERN: /[\\/]+/ }
 export { 
 /** win: '\\'; others: '/' */
@@ -342,10 +342,10 @@ export const FILE_CREATE_NEW_AND_MODE_ALL = { createNew: true, mode: 0o777 };
 <zh_cn>调试</zh_cn>
 <zh_tw>調試</zh_tw>
 ================================================================================================ */
-export { type, AnyConstructor, // Any constructor
-type, ArrayLikeArg, // array-like object (Array, Uint8Array, NodeList, etc.) that is not a string
-assert, assertAlmostEquals, assertArrayIncludes, assertEquals, assertExists, assertFalse, assertGreater, assertGreaterOrEqual, assertInstanceOf, AssertionError, assertIsError, assertLess, assertLessOrEqual, assertMatch, assertNotEquals, assertNotInstanceOf, assertNotMatch, assertNotStrictEquals, assertObjectMatch, assertRejects, assertStrictEquals, assertStringIncludes, assertThrows, equal, fail, type, Falsy, // Assertion condition for assertFalse.
-type, GetConstructorType, // Gets constructor type
+export { AnyConstructor, // Any constructor
+ArrayLikeArg, // array-like object (Array, Uint8Array, NodeList, etc.) that is not a string
+assert, assertAlmostEquals, assertArrayIncludes, assertEquals, assertExists, assertFalse, assertGreater, assertGreaterOrEqual, assertInstanceOf, AssertionError, assertIsError, assertLess, assertLessOrEqual, assertMatch, assertNotEquals, assertNotInstanceOf, assertNotMatch, assertNotStrictEquals, assertObjectMatch, assertRejects, assertStrictEquals, assertStringIncludes, assertThrows, equal, fail, Falsy, // Assertion condition for assertFalse.
+GetConstructorType, // Gets constructor type
 unimplemented, unreachable, } from 'https://deno.land/std@0.211.0/assert/mod.ts';
 /* ================================================================================================
 <en_us>Provide process processing related functions, uniformly write DENO and NODE, and currently obtain related items from lib.deno.ns.d.ts, and then give a few items to a small number</en_us>

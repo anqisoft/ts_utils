@@ -29,7 +29,7 @@ declare global {
             <zh_cn>将指定字符串字面量或正则表达式，替换为拆分专用分隔符</zh_cn>
             <zh_tw>zh_tw</zh_tw>
 
-            @param from {string | RegExp} <en_us>en_us</en_us><zh_cn>想要替换为拆分专用分隔符的字符串字面量或正则表达式</zh_cn><zh_tw>zh_tw</zh_tw>
+            @param {string | RegExp} from <en_us>en_us</en_us><zh_cn>想要替换为拆分专用分隔符的字符串字面量或正则表达式</zh_cn><zh_tw>zh_tw</zh_tw>
             @returns {string} <en_us>en_us</en_us><zh_cn>替换结果</zh_cn><zh_tw>zh_tw</zh_tw>
         */
         _replaceToSplitSeparator(this: string, from: string | RegExp): string;
@@ -102,7 +102,7 @@ export interface AsyncFunc extends Function {
  * <en_us>Guard: Asynchronous method</en_us>
  * <zh_cn>守卫：异步方法</zh_cn>
  * <zh_tw>守衛：异步方法</zh_tw>
- * @param func {unknown} <en_us>en_us</en_us><zh_cn>需检测是否为异步方法的方法</zh_cn><zh_tw>zh_tw</zh_tw>
+ * @param {unknown} func <en_us>en_us</en_us><zh_cn>需检测是否为异步方法的方法</zh_cn><zh_tw>zh_tw</zh_tw>
  * @returns {boolean} <en_us>en_us</en_us><zh_cn>检测结果，true表示该方法为异步方法，false表示该方法为同步方法</zh_cn><zh_tw>zh_tw</zh_tw>
  */
 export declare function isAsyncFunc(func: unknown): func is AsyncFunc;
@@ -110,7 +110,7 @@ export declare function isAsyncFunc(func: unknown): func is AsyncFunc;
  * <en_us>Guard: synchronization method</en_us>
  * <zh_cn>守卫：同步方法</zh_cn>
  * <zh_tw>守衛：同步方法</zh_tw>
- * @param func {unknown} <en_us>en_us</en_us><zh_cn>需检测是否为同步方法的方法</zh_cn><zh_tw>zh_tw</zh_tw>
+ * @param {unknown} func <en_us>en_us</en_us><zh_cn>需检测是否为同步方法的方法</zh_cn><zh_tw>zh_tw</zh_tw>
  * @returns {boolean} <en_us>en_us</en_us><zh_cn>检测结果，true表示该方法为同步方法，false表示该方法为异步方法</zh_cn><zh_tw>zh_tw</zh_tw>
  */
 export declare function isSyncFunc(func: unknown): func is SyncFunc;
@@ -125,7 +125,7 @@ export type I18N_LANG_KIND = 'en_us' | 'zh_cn' | 'zh_tw';
  * <zh_cn>检测字符串是否为所支持的国际化语言类型</zh_cn>
  * <zh_tw>可國際化</zh_tw>
  *
- * @param lang {string} <en_us>en_us</en_us><zh_cn>需检测是否为所支持的国际化语言的字符串</zh_cn><zh_tw>zh_tw</zh_tw>
+ * @param {string} lang <en_us>en_us</en_us><zh_cn>需检测是否为所支持的国际化语言的字符串</zh_cn><zh_tw>zh_tw</zh_tw>
  * @returns {boolean} <en_us>en_us</en_us><zh_cn>是否为所支持的国际化语言</zh_cn><zh_tw>zh_tw</zh_tw>
  */
 export declare function isI18nLangKind(lang: string): lang is I18N_LANG_KIND;
@@ -186,7 +186,7 @@ export interface I18nable {
  * <zh_cn>检测字符串是否为所支持的国际化语言类型</zh_cn>
  * <zh_tw>可國際化</zh_tw>
  *
- * @param lang {string} <en_us>en_us</en_us><zh_cn>需检测是否为所支持的国际化语言的字符串</zh_cn><zh_tw>zh_tw</zh_tw>
+ * @param {string} lang <en_us>en_us</en_us><zh_cn>需检测是否为所支持的国际化语言的字符串</zh_cn><zh_tw>zh_tw</zh_tw>
  * @returns {boolean} <en_us>en_us</en_us><zh_cn>是否为所支持的国际化语言</zh_cn><zh_tw>zh_tw</zh_tw>
  */
 export declare function isI18nable(obj: object): obj is I18nable;
@@ -242,7 +242,7 @@ declare global {
     interface Number {
         /**
          * <en_us>en_us</en_us><zh_cn>带小数位进行四舍五入</zh_cn><zh_tw>zh_tw</zh_tw>
-         * @param digit {number} <en_us>en_us</en_us><zh_cn>小数位数</zh_cn><zh_tw>zh_tw</zh_tw>
+         * @param {number} digit <en_us>en_us</en_us><zh_cn>小数位数</zh_cn><zh_tw>zh_tw</zh_tw>
          * @returns {number} 带小数位四舍五入结果
          */
         _roundWithDigit(digit: number): number;

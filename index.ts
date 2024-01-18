@@ -60,7 +60,7 @@ declare global {
             <zh_cn>将指定字符串字面量或正则表达式，替换为拆分专用分隔符</zh_cn>
             <zh_tw>將指定字符串字面量或正則表達式，替換為拆分專用分隔符</zh_tw>
 
-            @param from {string | RegExp} <en_us>Want to replace it with a string of string or regular expression of the dedicated separator</en_us><zh_cn>想要替换为拆分专用分隔符的字符串字面量或正则表达式</zh_cn><zh_tw>想要替換為拆分專用分隔符的字符串字面量或正則表達式</zh_tw>
+            @param {string | RegExp} from <en_us>Want to replace it with a string of string or regular expression of the dedicated separator</en_us><zh_cn>想要替换为拆分专用分隔符的字符串字面量或正则表达式</zh_cn><zh_tw>想要替換為拆分專用分隔符的字符串字面量或正則表達式</zh_tw>
             @returns {string} <en_us>replacement result</en_us><zh_cn>替换结果</zh_cn><zh_tw>替換結果</zh_tw>
         */
 		_replaceToSplitSeparator(this: string, from: string | RegExp): string;
@@ -182,7 +182,7 @@ export interface AsyncFunc extends Function {
  * <en_us>Guard: asynchronous method</en_us>
  * <zh_cn>守卫：异步方法</zh_cn>
  * <zh_tw>守衛：異步方法</zh_tw>
- * @param func {unknown} <en_us>Methods that need to be asynchronous</en_us><zh_cn>需检测是否为异步方法的方法</zh_cn><zh_tw>需檢測是否為異步方法的方法</zh_tw>
+ * @param {unknown} func <en_us>Methods that need to be asynchronous</en_us><zh_cn>需检测是否为异步方法的方法</zh_cn><zh_tw>需檢測是否為異步方法的方法</zh_tw>
  * @returns {boolean} <en_us>detection results, True represents this method as asynchronous method, FALSE indicates that the method is a synchronization method</en_us><zh_cn>检测结果，true表示该方法为异步方法，false表示该方法为同步方法</zh_cn><zh_tw>檢測結果，true表示該方法為異步方法，false表示該方法為同步方法</zh_tw>
  */
 export function isAsyncFunc(func: unknown): func is AsyncFunc {
@@ -195,7 +195,7 @@ export function isAsyncFunc(func: unknown): func is AsyncFunc {
  * <en_us>Guard: Synchronous method</en_us>
  * <zh_cn>守卫：同步方法</zh_cn>
  * <zh_tw>守衛：同步方法</zh_tw>
- * @param func {unknown} <en_us>Methods that need to be detected as a synchronization method</en_us><zh_cn>需检测是否为同步方法的方法</zh_cn><zh_tw>需檢測是否為同步方法的方法</zh_tw>
+ * @param {unknown} func <en_us>Methods that need to be detected as a synchronization method</en_us><zh_cn>需检测是否为同步方法的方法</zh_cn><zh_tw>需檢測是否為同步方法的方法</zh_tw>
  * @returns {boolean} <en_us>detection results, True represents the method of synchronization, FALSE represents the asynchronous method</en_us><zh_cn>检测结果，true表示该方法为同步方法，false表示该方法为异步方法</zh_cn><zh_tw>檢測結果，true表示該方法為同步方法，false表示該方法為異步方法</zh_tw>
  */
 export function isSyncFunc(func: unknown): func is SyncFunc {
@@ -232,7 +232,7 @@ export type I18N_LANG_KIND = 'en_us' | 'zh_cn' | 'zh_tw';
  * <zh_cn>检测字符串是否为所支持的国际化语言类型</zh_cn>
  * <zh_tw>檢測字符串是否為所支持的國際化語言類型</zh_tw>
  *
- * @param lang {string} <en_us>need to detect the string of the internationalized language that is supported</en_us><zh_cn>需检测是否为所支持的国际化语言的字符串</zh_cn><zh_tw>需檢測是否為所支持的國際化語言的字符串</zh_tw>
+ * @param {string} lang <en_us>need to detect the string of the internationalized language that is supported</en_us><zh_cn>需检测是否为所支持的国际化语言的字符串</zh_cn><zh_tw>需檢測是否為所支持的國際化語言的字符串</zh_tw>
  * @returns {boolean} <en_us>Is it a supported international language</en_us><zh_cn>是否为所支持的国际化语言</zh_cn><zh_tw>是否為所支持的國際化語言</zh_tw>
  */
 export function isI18nLangKind(lang: string): lang is I18N_LANG_KIND {
@@ -305,7 +305,7 @@ export interface I18nable {
  * <zh_cn>检测字符串是否为所支持的国际化语言类型</zh_cn>
  * <zh_tw>檢測字符串是否為所支持的國際化語言類型</zh_tw>
  *
- * @param lang {string} <en_us>need to detect the string of the internationalized language that is supported</en_us><zh_cn>需检测是否为所支持的国际化语言的字符串</zh_cn><zh_tw>需檢測是否為所支持的國際化語言的字符串</zh_tw>
+ * @param {string} lang <en_us>need to detect the string of the internationalized language that is supported</en_us><zh_cn>需检测是否为所支持的国际化语言的字符串</zh_cn><zh_tw>需檢測是否為所支持的國際化語言的字符串</zh_tw>
  * @returns {boolean} <en_us>Is it a supported international language</en_us><zh_cn>是否为所支持的国际化语言</zh_cn><zh_tw>是否為所支持的國際化語言</zh_tw>
  */
 export function isI18nable(obj: object): obj is I18nable {
@@ -413,7 +413,7 @@ declare global {
 	interface Number {
 		/**
 		 * <en_us>with a decimal position for four houses and five entry</en_us><zh_cn>带小数位进行四舍五入</zh_cn><zh_tw>帶小數位進行四捨五入</zh_tw>
-		 * @param digit {number} <en_us>decimal digits</en_us><zh_cn>小数位数</zh_cn><zh_tw>小數位數</zh_tw>
+		 * @param {number} digit <en_us>decimal digits</en_us><zh_cn>小数位数</zh_cn><zh_tw>小數位數</zh_tw>
 		 * @returns {number} 带小数位四舍五入结果
 		 */
 		_roundWithDigit(digit: number): number;

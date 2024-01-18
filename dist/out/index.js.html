@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: index.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: index.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ * Copyright (c) 2024 anqisoft@gmail.com
+ * index.ts
+ *
+ * &lt;en_us>
+ * Creation: January 15, 2024 11:38:05
+ * Function: Provide the most basic and common feature of TypeScript code libraries, which is paired with the javascript version of js_utils library, etc.
+ * &lt;/en_us>
+ *
+ * &lt;zh_cn>
+ * 创建：2024年1月15日 11:38:05
+ * 功能：提供typescript各代码库最基础且共用的功能，与javascript版的js_utils库对等
+ * &lt;/zh_cn>
+ *
+ * &lt;zh_tw>
+ * 創建：2024年1月15日 11:38:05
+ * 功能：提供typescript各代碼庫最基礎且共用的功能，與javascript版的js_utils庫對等
+ * &lt;/zh_tw>
+ */
+/// &lt;references="./types/lib.deno.ns.d.ts"
+/* ================================================================================================
+&lt;en_us>characters: provide special characters, such as changing rows, replacement divisions, etc.&lt;/en_us>
+&lt;zh_cn>字符：提供特殊字符，如换行符、替换分隔符等&lt;/zh_cn>
+&lt;zh_tw>字符：提供特殊字符，如換行符、替換分隔符等&lt;/zh_tw>
+================================================================================================ */
+/**
+    &lt;en_us>Enter&lt;/en_us>
+    &lt;zh_cn>回车&lt;/zh_cn>
+    &lt;zh_tw>回車&lt;/zh_tw>
+*/
+export const CR = '\r';
+/**
+    &lt;en_us>change line&lt;/en_us>
+    &lt;zh_cn>换行&lt;/zh_cn>
+    &lt;zh_tw>換行&lt;/zh_tw>
+*/
+export const LF = '\n';
+/**
+    &lt;en_us>Enter the row symbol&lt;/en_us>
+    &lt;zh_cn>回车换行符&lt;/zh_cn>
+    &lt;zh_tw>回車換行符&lt;/zh_tw>
+*/
+export const CRLF = '\r\n';
+/**
+    &lt;en_us>split dedicated separators, first replace a series of special string with this, and then use this further split&lt;/en_us>
+    &lt;zh_cn>拆分专用分隔符，先把一系列特殊的字符串替换成这个，再用这个进一步拆分&lt;/zh_cn>
+    &lt;zh_tw>拆分專用分隔符，先把一系列特殊的字符串替換成這個，再用這個進一步拆分&lt;/zh_tw>
+*/
+export const SEPARATOR_OF_SPLIT = '\0';
+String.prototype._replaceToSplitSeparator = function (from) {
+    return this.replace(from, SEPARATOR_OF_SPLIT);
+};
+/* ================================================================================================
+&lt;en_us>Date, such as providing GMT+8 related methods in China&lt;/en_us>
+&lt;zh_cn>日期，如提供中国时区GMT+8相关方法&lt;/zh_cn>
+&lt;zh_tw>日期，如提供中國時區GMT+8相關方法&lt;/zh_tw>
+================================================================================================ */
+/**
+ * &lt;en_us>Date correction value&lt;/en_us>
+ * &lt;zh_cn>日期修正值&lt;/zh_cn>
+ * &lt;zh_tw>日期修正值&lt;/zh_tw>
+ */
+export const DATE_OFFSET_GMT8 = 1000 * 60 * 60 * 8;
+/**
+ * &lt;en_us>Get the revised date&lt;/en_us>
+ * &lt;zh_cn>获取修正后的日期&lt;/zh_cn>
+ * &lt;zh_tw>獲取修正後的日期&lt;/zh_tw>
+ *
+ * @returns
+ * &lt;en_us>The date after correction&lt;/en_us>
+ * &lt;zh_cn>修正后的日期&lt;/zh_cn>
+ * &lt;zh_tw>修正後的日期&lt;/zh_tw>
+ */
+export function getFixedDate() {
+    return new Date(new Date().getTime() + DATE_OFFSET_GMT8);
+}
+/**
+ * &lt;en_us>Get the revised date&lt;/en_us>
+ * &lt;zh_cn>获取修正后的日期&lt;/zh_cn>
+ * &lt;zh_tw>獲取修正後的日期&lt;/zh_tw>
+ *
+ * @returns
+ * &lt;en_us>The date after correction&lt;/en_us>
+ * &lt;zh_cn>修正后的日期&lt;/zh_cn>
+ * &lt;zh_tw>修正後的日期&lt;/zh_tw>
+ */
+export function getFilenameTimestampPostfix() {
+    // return getFixedDate().toJSON().replace('T', ' ').replace(/-/g, '').replace(/:/g, '').replace(/Z/g, '');
+    return '_'.concat(getFixedDate().toJSON().replace(/-/g, '').replace(/:/g, '').replace('T', '_').split('.')[0]);
+}
+Date.prototype._addGmt8 = function () {
+    return new Date(this.getTime() + DATE_OFFSET_GMT8);
+};
+Date.prototype._toFilenameTimestampPostfix = function () {
+    return '_'.concat(this.toJSON().replace(/-/g, '').replace(/:/g, '').replace('T', '_').split('.')[0]);
+};
+Date.prototype._toGmt8FilenameTimestampPostfix = function () {
+    return '_'.concat((new Date(this.getTime() + DATE_OFFSET_GMT8))
+        .toJSON()
+        .replace(/-/g, '').replace(/:/g, '')
+        .replace('T', '_').split('.')[0]);
+};
+/**
+ * &lt;en_us>Guard: asynchronous method&lt;/en_us>
+ * &lt;zh_cn>守卫：异步方法&lt;/zh_cn>
+ * &lt;zh_tw>守衛：異步方法&lt;/zh_tw>
+ * @param {unknown} func &lt;en_us>Methods that need to be asynchronous&lt;/en_us>&lt;zh_cn>需检测是否为异步方法的方法&lt;/zh_cn>&lt;zh_tw>需檢測是否為異步方法的方法&lt;/zh_tw>
+ * @returns {boolean} &lt;en_us>detection results, True represents this method as asynchronous method, FALSE indicates that the method is a synchronization method&lt;/en_us>&lt;zh_cn>检测结果，true表示该方法为异步方法，false表示该方法为同步方法&lt;/zh_cn>&lt;zh_tw>檢測結果，true表示該方法為異步方法，false表示該方法為同步方法&lt;/zh_tw>
+ */
+export function isAsyncFunc(func) {
+    // return func instanceof Function &amp;&amp; (func instanceof Promise);
+    // return func instanceof Function &amp;&amp; 'async' in func;
+    return func instanceof Function &amp;&amp; func.constructor.name === 'AsyncFunction';
+}
+/**
+ * &lt;en_us>Guard: Synchronous method&lt;/en_us>
+ * &lt;zh_cn>守卫：同步方法&lt;/zh_cn>
+ * &lt;zh_tw>守衛：同步方法&lt;/zh_tw>
+ * @param {unknown} func &lt;en_us>Methods that need to be detected as a synchronization method&lt;/en_us>&lt;zh_cn>需检测是否为同步方法的方法&lt;/zh_cn>&lt;zh_tw>需檢測是否為同步方法的方法&lt;/zh_tw>
+ * @returns {boolean} &lt;en_us>detection results, True represents the method of synchronization, FALSE represents the asynchronous method&lt;/en_us>&lt;zh_cn>检测结果，true表示该方法为同步方法，false表示该方法为异步方法&lt;/zh_cn>&lt;zh_tw>檢測結果，true表示該方法為同步方法，false表示該方法為異步方法&lt;/zh_tw>
+ */
+export function isSyncFunc(func) {
+    // return func instanceof Function &amp;&amp; !(func instanceof Promise);
+    // return func instanceof Function &amp;&amp; !('async' in func);
+    return func instanceof Function &amp;&amp; func.constructor.name === 'Function';
+}
+/* ================================================================================================
+&lt;en_us>Internationalization: Provide international support basic types, marks, etc.&lt;/en_us>
+&lt;zh_cn>国际化：提供国际化支持基础类型、标记等&lt;/zh_cn>
+&lt;zh_tw>國際化：提供國際化支持基礎類型、標記等&lt;/zh_tw>
+================================================================================================ */
+/**
+ * &lt;en_us>international language name&lt;/en_us>
+ * &lt;zh_cn>国际化语言名称&lt;/zh_cn>
+ * &lt;zh_tw>國際化語言名稱&lt;/zh_tw>
+ */
+export var I18N_LANG_NAME;
+(function (I18N_LANG_NAME) {
+    I18N_LANG_NAME["en_us"] = "en_us";
+    I18N_LANG_NAME["zh_cn"] = "zh_cn";
+    I18N_LANG_NAME["zh_tw"] = "zh_tw";
+})(I18N_LANG_NAME || (I18N_LANG_NAME = {}));
+/**
+ * &lt;en_us>to detect whether the string is supported by the supported international language type&lt;/en_us>
+ * &lt;zh_cn>检测字符串是否为所支持的国际化语言类型&lt;/zh_cn>
+ * &lt;zh_tw>檢測字符串是否為所支持的國際化語言類型&lt;/zh_tw>
+ *
+ * @param {string} lang &lt;en_us>need to detect the string of the internationalized language that is supported&lt;/en_us>&lt;zh_cn>需检测是否为所支持的国际化语言的字符串&lt;/zh_cn>&lt;zh_tw>需檢測是否為所支持的國際化語言的字符串&lt;/zh_tw>
+ * @returns {boolean} &lt;en_us>Is it a supported international language&lt;/en_us>&lt;zh_cn>是否为所支持的国际化语言&lt;/zh_cn>&lt;zh_tw>是否為所支持的國際化語言&lt;/zh_tw>
+ */
+export function isI18nLangKind(lang) {
+    return I18N_LANG_ARRAY.indexOf(lang) > -1;
+}
+/**
+ * &lt;en_us>internationalization&lt;/en_us>
+ * &lt;zh_cn>可国际化&lt;/zh_cn>
+ * &lt;zh_tw>可國際化&lt;/zh_tw>
+ */
+export const I18N_LANG_ARRAY = [
+    I18N_LANG_NAME.en_us,
+    I18N_LANG_NAME.zh_cn,
+    I18N_LANG_NAME.zh_tw,
+];
+/**
+ * &lt;en_us>American English Start Label&lt;/en_us>
+ * &lt;zh_cn>美式英语起始标记&lt;/zh_cn>
+ * &lt;zh_tw>美式英語起始標記&lt;/zh_tw>
+ */
+export const HTML_TAG_BEGIN__EN_US = `&lt;${I18N_LANG_NAME.en_us}>`;
+/**
+ * &lt;en_us>American English ending mark&lt;/en_us>
+ * &lt;zh_cn>美式英语结束标记&lt;/zh_cn>
+ * &lt;zh_tw>美式英語結束標記&lt;/zh_tw>
+ */
+export const HTML_TAG_END__EN_US = `&lt;/${I18N_LANG_NAME.en_us}>`;
+/**
+ * &lt;en_us>Simplified Chinese starting label&lt;/en_us>
+ * &lt;zh_cn>简体中文起始标记&lt;/zh_cn>
+ * &lt;zh_tw>簡體中文起始標記&lt;/zh_tw>
+ */
+export const HTML_TAG_BEGIN__ZH_CN = `&lt;${I18N_LANG_NAME.zh_cn}>`;
+/**
+ * &lt;en_us>Simplified Chinese end mark&lt;/en_us>
+ * &lt;zh_cn>简体中文结束标记&lt;/zh_cn>
+ * &lt;zh_tw>簡體中文結束標記&lt;/zh_tw>
+ */
+export const HTML_TAG_END__ZH_CN = `&lt;/${I18N_LANG_NAME.zh_cn}>`;
+/**
+ * &lt;en_us>Traditional Chinese starting label&lt;/en_us>
+ * &lt;zh_cn>繁体中文起始标记&lt;/zh_cn>
+ * &lt;zh_tw>繁體中文起始標記&lt;/zh_tw>
+ */
+export const HTML_TAG_BEGIN__ZH_TW = `&lt;${I18N_LANG_NAME.zh_tw}>`;
+/**
+ * &lt;en_us>Traditional Chinese end mark&lt;/en_us>
+ * &lt;zh_cn>繁体中文结束标记&lt;/zh_cn>
+ * &lt;zh_tw>繁體中文結束標記&lt;/zh_tw>
+ */
+export const HTML_TAG_END__ZH_TW = `&lt;/${I18N_LANG_NAME.zh_tw}>`;
+/**
+ * &lt;en_us>to detect whether the string is supported by the supported international language type&lt;/en_us>
+ * &lt;zh_cn>检测字符串是否为所支持的国际化语言类型&lt;/zh_cn>
+ * &lt;zh_tw>檢測字符串是否為所支持的國際化語言類型&lt;/zh_tw>
+ *
+ * @param {string} lang &lt;en_us>need to detect the string of the internationalized language that is supported&lt;/en_us>&lt;zh_cn>需检测是否为所支持的国际化语言的字符串&lt;/zh_cn>&lt;zh_tw>需檢測是否為所支持的國際化語言的字符串&lt;/zh_tw>
+ * @returns {boolean} &lt;en_us>Is it a supported international language&lt;/en_us>&lt;zh_cn>是否为所支持的国际化语言&lt;/zh_cn>&lt;zh_tw>是否為所支持的國際化語言&lt;/zh_tw>
+ */
+export function isI18nable(obj) {
+    return I18N_LANG_NAME.en_us in obj &amp;&amp; I18N_LANG_NAME.zh_cn in obj &amp;&amp; I18N_LANG_NAME.zh_tw in obj;
+}
+/**
+ * &lt;en_us>mark: internationalization&lt;/en_us>
+ * &lt;zh_cn>标记：国际化&lt;/zh_cn>
+ * &lt;zh_tw>標記：國際化&lt;/zh_tw>
+ */
+export var I18nFlag;
+(function (I18nFlag) {
+    /*
+     * &lt;en_us>None&lt;/en_us>
+     * &lt;zh_cn>无&lt;/zh_cn>
+     * &lt;zh_tw>無&lt;/zh_tw>
+     */
+    I18nFlag[I18nFlag["none"] = 0] = "none";
+    /*
+     * &lt;en_us>Only American English&lt;/en_us>
+     * &lt;zh_cn>仅显示美式英语&lt;/zh_cn>
+     * &lt;zh_tw>僅顯示美式英語&lt;/zh_tw>
+     */
+    I18nFlag[I18nFlag["en_us"] = 1] = "en_us";
+    /*
+     * &lt;en_us>only show simplified Chinese&lt;/en_us>
+     * &lt;zh_cn>仅显示简体中文&lt;/zh_cn>
+     * &lt;zh_tw>僅顯示簡體中文&lt;/zh_tw>
+     */
+    I18nFlag[I18nFlag["zh_cn"] = 2] = "zh_cn";
+    /*
+     * &lt;en_us>English and simplified Chinese&lt;/en_us>
+     * &lt;zh_cn>英语与简体中文&lt;/zh_cn>
+     * &lt;zh_tw>英語與簡體中文&lt;/zh_tw>
+     */
+    I18nFlag[I18nFlag["en_us_and_zh_cn"] = 3] = "en_us_and_zh_cn";
+    /*
+     * &lt;en_us>only show traditional Chinese&lt;/en_us>
+     * &lt;zh_cn>仅显示繁体中文&lt;/zh_cn>
+     * &lt;zh_tw>僅顯示繁體中文&lt;/zh_tw>
+     */
+    I18nFlag[I18nFlag["zh_tw"] = 4] = "zh_tw";
+    /*
+     * &lt;en_us>English and traditional Chinese&lt;/en_us>
+     * &lt;zh_cn>英语与繁体中文&lt;/zh_cn>
+     * &lt;zh_tw>英語與繁體中文&lt;/zh_tw>
+     */
+    I18nFlag[I18nFlag["en_us_and_zh_tw"] = 5] = "en_us_and_zh_tw";
+    /*
+     * &lt;en_us>Simplified Chinese&lt;/en_us>
+     * &lt;zh_cn>简繁体中文&lt;/zh_cn>
+     * &lt;zh_tw>簡繁體中文&lt;/zh_tw>
+     */
+    I18nFlag[I18nFlag["zh_cn_and_zh_tw"] = 6] = "zh_cn_and_zh_tw";
+    /*
+     * &lt;en_us>All&lt;/en_us>
+     * &lt;zh_cn>全部&lt;/zh_cn>
+     * &lt;zh_tw>全部&lt;/zh_tw>
+     */
+    I18nFlag[I18nFlag["all"] = 7] = "all";
+})(I18nFlag || (I18nFlag = {}));
+/**
+ * &lt;en_us>Start the mark length&lt;/en_us>
+ * &lt;zh_cn>开始标记长度&lt;/zh_cn>
+ * &lt;zh_tw>開始標記長度&lt;/zh_tw>
+ */
+export const I18N_HTML_BEGIN_TAG_LENGTH = 7;
+/**
+ * &lt;en_us>end the marker length&lt;/en_us>
+ * &lt;zh_cn>结束标记长度&lt;/zh_cn>
+ * &lt;zh_tw>結束標記長度&lt;/zh_tw>
+ */
+export const I18N_HTML_END_TAG_LENGTH = I18N_HTML_BEGIN_TAG_LENGTH + 1;
+/* ================================================================================================
+&lt;en_us>Digital type assistance&lt;/en_us>
+&lt;zh_cn>数字类型辅助&lt;/zh_cn>
+&lt;zh_tw>數字類型輔助&lt;/zh_tw>
+================================================================================================ */
+/**
+ * &lt;en_us>High -level four houses and five entry&lt;/en_us>
+ * &lt;zh_cn>高级四舍五入&lt;/zh_cn>
+ * &lt;zh_tw>高級四捨五入&lt;/zh_tw>
+ *
+ * @param num {number}
+ * &lt;en_us>original number&lt;/en_us>
+ * &lt;zh_cn>原始数字&lt;/zh_cn>
+ * &lt;zh_tw>原始數字&lt;/zh_tw>
+ *
+ * @param digit {number}
+ * &lt;en_us>digits&lt;/en_us>
+ * &lt;zh_cn>位数&lt;/zh_cn>
+ * &lt;zh_tw>位數&lt;/zh_tw>
+ *
+ * @returns {number}
+ * &lt;en_us>Four House and Five Entry Results&lt;/en_us>
+ * &lt;zh_cn>四舍五入结果&lt;/zh_cn>
+ * &lt;zh_tw>四捨五入結果&lt;/zh_tw>
+ */
+export const roundWithDigit = (num, digit) => parseFloat(num.toFixed(digit));
+Number.prototype._roundWithDigit = function (digit) {
+    return parseFloat(this.toFixed(digit));
+};
+/* ================================================================================================
+&lt;en_us>file processing, unified DENO and node&lt;/en_us>
+&lt;zh_cn>文件处理，统一deno与node&lt;/zh_cn>
+&lt;zh_tw>文件處理，統一deno與node&lt;/zh_tw>
+================================================================================================ */
+export { 
+/**
+    &lt;en_us>merger path&lt;/en_us>
+    &lt;zh_cn>合并路径&lt;/zh_cn>
+    &lt;zh_tw>合併路徑&lt;/zh_tw>
+    @see https://deno.land/std@0.204.0/path/mod.ts
+*/
+join as joinPath, } from 'https://deno.land/std@0.204.0/path/mod.ts';
+export { exists, ExistsOptions, existsSync } from 'https://deno.land/std@0.211.0/fs/exists.ts';
+// eg: { SEP: "\\", SEP_PATTERN: /[\\/]+/ }
+export { 
+/** win: '\\'; others: '/' */
+SEP, 
+/** eg: /[\\/]+/ */
+SEP_PATTERN, } from 'https://deno.land/std@0.211.0/path/separator.ts';
+/**
+ * &lt;en_us>complete permissions write file mode&lt;/en_us>
+ * &lt;zh_cn>完整权限写入文件模式&lt;/zh_cn>
+ * &lt;zh_tw>完整權限寫入文件模式&lt;/zh_tw>
+ */
+export const FILE_MODE_ALL = { mode: 0o777 };
+/**
+    &lt;en_us>Full permissions new file mode&lt;/en_us>
+    &lt;zh_cn>完整权限新建文件模式&lt;/zh_cn>
+    &lt;zh_tw>完整權限新建文件模式&lt;/zh_tw>
+*/
+export const FILE_CREATE_NEW_AND_MODE_ALL = { createNew: true, mode: 0o777 };
+/* ================================================================================================
+&lt;en_us>debug&lt;/en_us>
+&lt;zh_cn>调试&lt;/zh_cn>
+&lt;zh_tw>調試&lt;/zh_tw>
+================================================================================================ */
+export { AnyConstructor, // Any constructor
+ArrayLikeArg, // array-like object (Array, Uint8Array, NodeList, etc.) that is not a string
+assert, assertAlmostEquals, assertArrayIncludes, assertEquals, assertExists, assertFalse, assertGreater, assertGreaterOrEqual, assertInstanceOf, AssertionError, assertIsError, assertLess, assertLessOrEqual, assertMatch, assertNotEquals, assertNotInstanceOf, assertNotMatch, assertNotStrictEquals, assertObjectMatch, assertRejects, assertStrictEquals, assertStringIncludes, assertThrows, equal, fail, Falsy, // Assertion condition for assertFalse.
+GetConstructorType, // Gets constructor type
+unimplemented, unreachable, } from 'https://deno.land/std@0.211.0/assert/mod.ts';
+/* ================================================================================================
+&lt;en_us>Provide process processing related functions, uniformly write DENO and NODE, and currently obtain related items from lib.deno.ns.d.ts, and then give a few items to a small number&lt;/en_us>
+&lt;zh_cn>提供进程处理相关功能，统一deno与node的写法，目前从lib.deno.ns.d.ts获取相关项，再给少数项取别名 &lt;/zh_cn>
+&lt;zh_tw>提供進程處理相關功能，統一deno與node的寫法，目前從lib.deno.ns.d.ts獲取相關項，再給少數項取別名 &lt;/zh_tw>
+================================================================================================ */
+export const NotFoundError = Deno.errors.NotFound;
+export const PermissionDeniedError = Deno.errors.PermissionDenied;
+export const ConnectionRefusedError = Deno.errors.ConnectionRefused;
+export const ConnectionResetError = Deno.errors.ConnectionReset;
+export const ConnectionAbortedError = Deno.errors.ConnectionAborted;
+export const NotConnectedError = Deno.errors.NotConnected;
+export const AddrInUseError = Deno.errors.AddrInUse;
+export const AddrNotAvailableError = Deno.errors.AddrNotAvailable;
+export const BrokenPipeError = Deno.errors.BrokenPipe;
+export const AlreadyExistsError = Deno.errors.AlreadyExists;
+export const InvalidDataError = Deno.errors.InvalidData;
+export const TimedOutError = Deno.errors.TimedOut;
+export const InterruptedError = Deno.errors.Interrupted;
+export const WouldBlockError = Deno.errors.WouldBlock;
+export const WriteZeroError = Deno.errors.WriteZero;
+export const UnexpectedEofError = Deno.errors.UnexpectedEof;
+export const BadResourceError = Deno.errors.BadResource;
+export const HttpError = Deno.errors.Http;
+export const BusyError = Deno.errors.Busy;
+export const NotSupportedError = Deno.errors.NotSupported;
+export const FilesystemLoopError = Deno.errors.FilesystemLoop;
+export const IsADirectoryError = Deno.errors.IsADirectory;
+export const NetworkUnreachableError = Deno.errors.NetworkUnreachable;
+export const NotADirectoryError = Deno.errors.NotADirectory;
+/**
+ * 	&lt;en_us>Process ID&lt;/en_us>
+ * 	&lt;zh_cn>进程id&lt;/zh_cn>
+ * 	&lt;zh_tw>進程id&lt;/zh_tw>
+ */
+export const PROCESS_ID = Deno.pid;
+/**
+ * 	&lt;en_us>Father's process ID&lt;/en_us>
+ * 	&lt;zh_cn>父进程id&lt;/zh_cn>
+ * 	&lt;zh_tw>父進程id&lt;/zh_tw>
+ */
+export const PROCESS_PARENT_ID = Deno.ppid;
+/**
+ * &lt;en_us>exit process, call Deno.exit&lt;/en_us>
+ * &lt;zh_cn>退出进程，调用Deno.exit&lt;/zh_cn>
+ * &lt;zh_tw>退出進程，調用Deno.exit&lt;/zh_tw>
+ * @see https://deno.land/api@v1.39.2?s=Deno.exit
+ */
+export const exitProcess = Deno.exit;
+/**
+ * &lt;en_us>kill the process, call Deno.kill&lt;/en_us>
+ * &lt;zh_cn>杀掉进程，调用Deno.kill&lt;/zh_cn>
+ * &lt;zh_tw>殺掉進程，調用Deno.kill&lt;/zh_tw>
+ * @see https://deno.land/api@v1.39.2?s=Deno.exit
+ */
+export const killProcess = Deno.kill;
+/**
+ * &lt;en_us>Set the current activity directory&lt;/en_us>
+ * &lt;zh_cn>设置当前活动目录&lt;/zh_cn>
+ * &lt;zh_tw>設置當前活動目錄&lt;/zh_tw>
+ */
+export const setCurrentWorkingDirectory = Deno.chdir;
+/**
+ * &lt;en_us>Get the current activity directory&lt;/en_us>
+ * &lt;zh_cn>获取当前活动目录&lt;/zh_cn>
+ * &lt;zh_tw>獲取當前活動目錄&lt;/zh_tw>
+ * @returns {string} &lt;en_us>Current activity directory&lt;/en_us>&lt;zh_cn>当前活动目录&lt;/zh_cn>&lt;zh_tw>當前活動目錄&lt;/zh_tw>
+ */
+export const getCurrentWorkingDirectory = Deno.cwd;
+/**
+ * &lt;en_us>command line parameters&lt;/en_us>
+ * &lt;zh_cn>命令行参数&lt;/zh_cn>
+ * &lt;zh_tw>命令行參數&lt;/zh_tw>
+ */
+export const COMMAND_LINE_ARGS = Deno.args;
+export const { 
+// pid: PROCESS_ID,
+// ppid: PROCESS_PARENT_ID,
+memoryUsage, hostname, loadavg, networkInterfaces, systemMemoryInfo, noColor, osRelease, osUptime, test, bench, 
+// exit: exitProcess,
+env, execPath, 
+// chdir: setCurrentWorkingDirectory,
+// cwd: getCurrentWorkingDirectory,
+link, linkSync, SeekMode, 
+// copy,
+// iter,
+// iterSync,
+open, openSync, create, createSync, read, readSync, write, writeSync, seek, seekSync, fsync, fsyncSync, fdatasync, fdatasyncSync, close, FsFile, 
+// File,
+consoleSize, stdin, stdout, stderr, isatty, 
+// Buffer,
+// readAll,
+// readAllSync,
+// writeAll,
+// writeAllSync,
+mkdir, mkdirSync, makeTempDir, makeTempDirSync, makeTempFile, makeTempFileSync, chmod, chmodSync, chown, chownSync, remove, removeSync, renameSync, rename, readTextFile, readTextFileSync, readFile, readFileSync, realPath, realPathSync, readDir, readDirSync, copyFile, copyFileSync, readLink, readLinkSync, lstat, lstatSync, stat, statSync, writeFile, writeFileSync, writeTextFile, writeTextFileSync, truncate, truncateSync, 
+// metrics,
+resources, watchFs, 
+// Process,
+addSignalListener, removeSignalListener, 
+// run,
+Command, ChildProcess, inspect, PermissionStatus, Permissions, permissions, build, version, 
+// args: COMMAND_LINE_ARGS,
+// customInspect,
+mainModule, symlink, symlinkSync, ftruncate, ftruncateSync, futimeSync, futime, fstat, fstatSync, utimeSync, utime, serveHttp, upgradeWebSocket, 
+// kill: killProcess,
+resolveDns, refTimer, unrefTimer, uid: UserId, gid: GroupId, } = Deno;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#COMMAND_LINE_ARGS">COMMAND_LINE_ARGS</a></li><li><a href="global.html#CR">CR</a></li><li><a href="global.html#CRLF">CRLF</a></li><li><a href="global.html#DATE_OFFSET_GMT8">DATE_OFFSET_GMT8</a></li><li><a href="global.html#FILE_CREATE_NEW_AND_MODE_ALL">FILE_CREATE_NEW_AND_MODE_ALL</a></li><li><a href="global.html#FILE_MODE_ALL">FILE_MODE_ALL</a></li><li><a href="global.html#HTML_TAG_BEGIN__EN_US">HTML_TAG_BEGIN__EN_US</a></li><li><a href="global.html#HTML_TAG_BEGIN__ZH_CN">HTML_TAG_BEGIN__ZH_CN</a></li><li><a href="global.html#HTML_TAG_BEGIN__ZH_TW">HTML_TAG_BEGIN__ZH_TW</a></li><li><a href="global.html#HTML_TAG_END__EN_US">HTML_TAG_END__EN_US</a></li><li><a href="global.html#HTML_TAG_END__ZH_CN">HTML_TAG_END__ZH_CN</a></li><li><a href="global.html#HTML_TAG_END__ZH_TW">HTML_TAG_END__ZH_TW</a></li><li><a href="global.html#I18N_HTML_BEGIN_TAG_LENGTH">I18N_HTML_BEGIN_TAG_LENGTH</a></li><li><a href="global.html#I18N_HTML_END_TAG_LENGTH">I18N_HTML_END_TAG_LENGTH</a></li><li><a href="global.html#I18N_LANG_ARRAY">I18N_LANG_ARRAY</a></li><li><a href="global.html#I18N_LANG_NAME">I18N_LANG_NAME</a></li><li><a href="global.html#I18nFlag">I18nFlag</a></li><li><a href="global.html#LF">LF</a></li><li><a href="global.html#PROCESS_ID">PROCESS_ID</a></li><li><a href="global.html#PROCESS_PARENT_ID">PROCESS_PARENT_ID</a></li><li><a href="global.html#SEP">SEP</a></li><li><a href="global.html#SEPARATOR_OF_SPLIT">SEPARATOR_OF_SPLIT</a></li><li><a href="global.html#SEP_PATTERN">SEP_PATTERN</a></li><li><a href="global.html#exitProcess">exitProcess</a></li><li><a href="global.html#getCurrentWorkingDirectory">getCurrentWorkingDirectory</a></li><li><a href="global.html#getFilenameTimestampPostfix">getFilenameTimestampPostfix</a></li><li><a href="global.html#getFixedDate">getFixedDate</a></li><li><a href="global.html#isAsyncFunc">isAsyncFunc</a></li><li><a href="global.html#isI18nLangKind">isI18nLangKind</a></li><li><a href="global.html#isI18nable">isI18nable</a></li><li><a href="global.html#isSyncFunc">isSyncFunc</a></li><li><a href="global.html#joinPath">joinPath</a></li><li><a href="global.html#killProcess">killProcess</a></li><li><a href="global.html#roundWithDigit">roundWithDigit</a></li><li><a href="global.html#setCurrentWorkingDirectory">setCurrentWorkingDirectory</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Jan 18 2024 11:27:16 GMT+0800 (China Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
